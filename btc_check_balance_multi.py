@@ -4,7 +4,7 @@ import time
 
 url = "https://blockchain.info/rawaddr/"
 
-with open('wallet_addresses.csv') as csv_file:
+with open('btc_wallet.csv') as csv_file:
     csv_reader = csv.reader(csv_file)
     line_count = 0
     for row in csv_reader:
