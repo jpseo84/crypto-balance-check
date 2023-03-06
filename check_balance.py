@@ -7,10 +7,12 @@ def check_balance(currency, address):
         api_url = f"https://blockchain.info/rawaddr/{address}"
         response = requests.get(api_url).json()
         return response['final_balance'] / 10**8
+
     elif currency == 'ETH':
         api_url = f"https://api.etherscan.io/api?module=account&action=balance&address={address}&tag=latest&apikey=YourApiKeyToken"
         response = requests.get(api_url).json()
         return int(response['result']) / 10**18
+
     elif currency == 'XRP':
         api_url = f"https://data.ripple.com/v2/accounts/{address}/balances"
         response = requests.get(api_url).json()
@@ -18,6 +20,17 @@ def check_balance(currency, address):
             if balance['currency'] == 'XRP':
                 return float(balance['value'])
         return None
+
+    elif currency == 'LTC':
+        api_url = f"https://api.blockcypher.com/v1/ltc/main/addrs/{address}/balance"
+        response = requests.get(api_url).json()
+        return response['balance'] / 10**8
+    
+    elif currency == 'DOGE':
+        api_url = f"https://api.blockcypher.com/v1/doge/main/addrs/{address}/balance"
+        response = requests.get(api_url).json()
+        return response['balance'] / 10**8
+
     else:
         return "Not supported currency"
 
